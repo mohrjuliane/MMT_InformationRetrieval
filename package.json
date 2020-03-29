@@ -1,0 +1,32 @@
+{
+    "name": "homework-01_inverted-index",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest",
+        "prettier": "prettier --write **/*.{js,json}",
+        "cli": "babel-node cli.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/georgms/textsearch102.git"
+    },
+    "author": "Georg M. Sorst <g.sorst@findologic.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/georgms/textsearch102/issues"
+    },
+    "homepage": "https://github.com/georgms/textsearch102#readme",
+    "devDependencies": {
+        "@babel/core": "^7.9.0",
+        "@babel/node": "^7.8.7",
+        "@babel/preset-env": "^7.9.0",
+        "babel-jest": "^25.2.3",
+        "jest": "^25.2.3",
+        "prettier": "^1.19.1"
+    },
+    "dependencies": {
+        "glob": "^7.1.6"
+    }
+}
