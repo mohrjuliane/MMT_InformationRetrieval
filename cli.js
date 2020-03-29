@@ -7,11 +7,15 @@ const searcher = new Searcher(glob.sync("corpus/*.txt"), true);
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: "Query: "
+    prompt: "Enter query, empty to quit: "
 });
 
 rl.prompt();
 rl.on("line", line => {
+    if (line==="") {
+        process.exit(0);
+    }
+
     const results = searcher.search(line.trim());
     console.log(`Found ${results.length} results, showing top 5\n`);
 
@@ -19,10 +23,10 @@ rl.on("line", line => {
         console.log(`${result.filename}: ${result.score}`);
 
         for (const [term, score] of Object.entries(result.terms)) {
-            console.log(`${term}: ${score}`);
+            console.log(`\t${term}: ${score}`);
         }
 
-        console.log("\n");
+        console.log("");
     }
 
     rl.prompt();
