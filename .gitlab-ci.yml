@@ -22,4 +22,6 @@ install:
 
 test:
     stage: test
-    script: npm test
+    script:
+        - npm run lint
+        - npm run test

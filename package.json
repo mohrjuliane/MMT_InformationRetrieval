@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "jest",
-        "prettier": "prettier --write **/*.{js,json}",
+        "lint": "prettier --check **/*.{js,json}",
+        "lint-fix": "prettier --write **/*.{js,json}",
         "cli": "babel-node cli.js"
     },
     "repository": {

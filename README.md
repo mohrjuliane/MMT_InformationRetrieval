@@ -9,11 +9,12 @@
 1. Add your implementation in `searcher.js`.
 2. Check that tests run successfully.
 3. Run Prettier before committing your implementation.
+4. Check that the build runs successfully on GitLab.
 
 # Format code with Prettier
 
 ```bash
-npm run prettier
+npm run lint-fix
 ```
 
 # Start CLI
