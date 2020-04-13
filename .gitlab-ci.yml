@@ -1,5 +1,9 @@
 image: node:latest
 
+default:
+    tags:
+        - "node:latest"
+
 stages:
     - build
     - test
