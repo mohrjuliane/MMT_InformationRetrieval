@@ -16,8 +16,6 @@ install:
     stage: build
     script:
         - npm install
-        - wget -q http://georgms.github.io/textsearch102/files/simple-wikipedia.zip && unzip -q simple-wikipedia.zip
-        - ls -R
     artifacts:
         paths:
             - node_modules/
@@ -26,4 +24,5 @@ test:
     stage: test
     script:
         - npm run lint
+        - wget -q http://georgms.github.io/textsearch102/files/simple-wikipedia.zip && unzip -q simple-wikipedia.zip
         - npm run test
