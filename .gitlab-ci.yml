@@ -16,6 +16,7 @@ install:
     stage: build
     script:
         - npm install
+        - npm run lint
     artifacts:
         paths:
             - node_modules/
@@ -23,6 +24,10 @@ install:
 test:
     stage: test
     script:
-        - npm run lint
         - wget -q http://georgms.github.io/textsearch102/files/simple-wikipedia.zip && unzip -q simple-wikipedia.zip
-        - npm run test
+        - npm run test-ci
+    artifacts:
+        when: always
+        reports:
+            junit:
+                - junit.xml

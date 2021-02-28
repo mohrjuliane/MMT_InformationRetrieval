@@ -8,10 +8,10 @@
 
 1. Add your implementation in `searcher.js`.
 2. Check that tests run successfully.
-3. Run Prettier before committing your implementation.
+3. Format the code before committing your implementation to make the code easier to read.
 4. Check that the build runs successfully on GitLab.
 
-# Format code with Prettier
+# Format code
 
 ```bash
 npm run lint-fix
