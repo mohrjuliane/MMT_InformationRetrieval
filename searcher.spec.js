@@ -47,7 +47,7 @@ describe("Searcher", () => {
         ]);
     });
 
-    it("searcher finds two words", () => {
+    it("finds two words", () => {
         expectSearchResultsFor("austria germany").toHaveLength(1713);
         expectTop5SearchResultsFor("austria germany").toEqual([
             {
@@ -126,5 +126,9 @@ describe("Searcher", () => {
         const expectedResults = searcher.search("salzburg");
         expectSearchResultsFor("salzburg blubbergurken").toEqual(expectedResults);
         expectSearchResultsFor("blubbergurken salzburg").toEqual(expectedResults);
+    });
+
+    test("returns all documents for empty search", () => {
+        expectSearchResultsFor("").toHaveLength(50418);
     });
 });
