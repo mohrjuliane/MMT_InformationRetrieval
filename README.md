@@ -1,7 +1,7 @@
 # Setup
 
 1. `npm install`
-2. Download the [Simple Wikipedia Corpus](http://georgms.github.io/textsearch102/files/simple-wikipedia.zip) and extract
+2. Download the [Simple Wikipedia Corpus](http://georgms.github.io/information-retrieval/files/simple-wikipedia.zip) and extract
    it here.
 
 # Implementation
