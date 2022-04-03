@@ -128,7 +128,7 @@ describe("Searcher", () => {
         expectSearchResultsFor("blubbergurken salzburg").toEqual(expectedResults);
     });
 
-    test("returns all documents for empty search", () => {
-        expectSearchResultsFor("").toHaveLength(50418);
+    test("returns empty result for empty search", () => {
+        expectSearchResultsFor("").toEqual([]);
     });
 });
