@@ -24,7 +24,7 @@ install:
 test:
     stage: test
     script:
-        - wget -q http://georgms.github.io/textsearch102/files/simple-wikipedia.zip && unzip -q simple-wikipedia.zip
+        - wget -q https://georgms.github.io/information-retrieval/files/simple-wikipedia.zip && unzip -q simple-wikipedia.zip
         - npm run test-ci
     artifacts:
         when: always
