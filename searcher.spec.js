@@ -21,8 +21,8 @@ describe("Searcher", () => {
         expectTop5SearchResultsFor("salzburg").toEqual([
             {
                 filename: "Archbishopric_of_Salzburg.txt",
-                score: 39613.357142857145,
-                terms: { salzburg: 39613.357142857145 }
+                score: 39614.142857142855,
+                terms: { salzburg: 39614.142857142855 }
             },
             {
                 filename: "Herbert_von_Karajan.txt",
