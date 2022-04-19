@@ -26,23 +26,23 @@ describe("Searcher", () => {
             },
             {
                 filename: "Herbert_von_Karajan.txt",
-                score: 10803.642857142857,
-                terms: { salzburg: 10803.642857142857 }
+                score: 10803.857142857143,
+                terms: { salzburg: 10803.857142857143 }
             },
             {
                 filename: "Wolfgang_Amadeus_Mozart.txt",
-                score: 10803.642857142857,
-                terms: { salzburg: 10803.642857142857 }
+                score: 10803.857142857143,
+                terms: { salzburg: 10803.857142857143 }
             },
             {
                 filename: "Alfons_Schuhbeck.txt",
-                score: 3601.214285714286,
-                terms: { salzburg: 3601.214285714286 }
+                score: 3601.285714285714,
+                terms: { salzburg: 3601.285714285714 }
             },
             {
                 filename: "Carl_Maria_von_Weber.txt",
-                score: 3601.214285714286,
-                terms: { salzburg: 3601.214285714286 }
+                score: 3601.285714285714,
+                terms: { salzburg: 3601.285714285714 }
             }
         ]);
     });
@@ -97,16 +97,16 @@ describe("Searcher", () => {
         expectTop5SearchResultsFor("blueprint").toEqual([
             {
                 filename: "RNA.txt",
-                score: 25208.5,
+                score: 25209,
                 terms: {
-                    blueprint: 25208.5
+                    blueprint: 25209
                 }
             },
             {
                 filename: "_03_Bonnie_Clyde.txt",
-                score: 25208.5,
+                score: 25209,
                 terms: {
-                    blueprint: 25208.5
+                    blueprint: 25209
                 }
             }
         ]);
