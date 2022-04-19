@@ -21,73 +21,73 @@ describe("Searcher", () => {
         expectTop5SearchResultsFor("salzburg").toEqual([
             {
                 filename: "Archbishopric_of_Salzburg.txt",
-                score: 39629.857142857145,
-                terms: { salzburg: 39629.857142857145 }
+                score: 39613.357142857145,
+                terms: { salzburg: 39613.357142857145 }
             },
             {
                 filename: "Herbert_von_Karajan.txt",
-                score: 10808.142857142857,
-                terms: { salzburg: 10808.142857142857 }
+                score: 10803.642857142857,
+                terms: { salzburg: 10803.642857142857 }
             },
             {
                 filename: "Wolfgang_Amadeus_Mozart.txt",
-                score: 10808.142857142857,
-                terms: { salzburg: 10808.142857142857 }
+                score: 10803.642857142857,
+                terms: { salzburg: 10803.642857142857 }
             },
             {
                 filename: "Alfons_Schuhbeck.txt",
-                score: 3602.714285714286,
-                terms: { salzburg: 3602.714285714286 }
+                score: 3601.214285714286,
+                terms: { salzburg: 3601.214285714286 }
             },
             {
                 filename: "Carl_Maria_von_Weber.txt",
-                score: 3602.714285714286,
-                terms: { salzburg: 3602.714285714286 }
+                score: 3601.214285714286,
+                terms: { salzburg: 3601.214285714286 }
             }
         ]);
     });
 
     it("finds two words", () => {
-        expectSearchResultsFor("austria germany").toHaveLength(1713);
+        expectSearchResultsFor("austria germany").toHaveLength(1707);
         expectTop5SearchResultsFor("austria germany").toEqual([
             {
                 filename: "Anschluss.txt",
-                score: 3891.5421630618653,
+                score: 3903.8262965918157,
                 terms: {
-                    austria: 3729.5704225352115,
-                    germany: 161.97174052665383
+                    austria: 3741.190812720848,
+                    germany: 162.63548387096773
                 }
             },
             {
                 filename: "Austria.txt",
-                score: 3794.359118745873,
+                score: 3806.245006269235,
                 terms: {
-                    austria: 3729.5704225352115,
-                    germany: 64.78869621066153
+                    austria: 3741.190812720848,
+                    germany: 65.05419354838709
                 }
             },
             {
                 filename: "Germany.txt",
-                score: 2686.44960062236,
+                score: 2696.7606770773964,
                 terms: {
-                    austria: 710.3943661971831,
-                    germany: 1976.0552344251766
+                    austria: 712.6077738515901,
+                    germany: 1984.1529032258063
                 }
             },
             {
                 filename: "Treaty_of_Versailles.txt",
-                score: 2650.6333143368884,
+                score: 2659.751047532201,
                 terms: {
-                    austria: 1775.9859154929577,
-                    germany: 874.6473988439307
+                    austria: 1781.5194346289752,
+                    germany: 878.2316129032257
                 }
             },
             {
                 filename: "Prussia.txt",
-                score: 1858.6827548463548,
+                score: 1865.07844294996,
                 terms: {
-                    austria: 1243.1901408450703,
-                    germany: 615.4926140012846
+                    austria: 1247.0636042402825,
+                    germany: 618.0148387096774
                 }
             }
         ]);
@@ -97,16 +97,16 @@ describe("Searcher", () => {
         expectTop5SearchResultsFor("blueprint").toEqual([
             {
                 filename: "RNA.txt",
-                score: 25219,
+                score: 25208.5,
                 terms: {
-                    blueprint: 25219
+                    blueprint: 25208.5
                 }
             },
             {
                 filename: "_03_Bonnie_Clyde.txt",
-                score: 25219,
+                score: 25208.5,
                 terms: {
-                    blueprint: 25219
+                    blueprint: 25208.5
                 }
             }
         ]);

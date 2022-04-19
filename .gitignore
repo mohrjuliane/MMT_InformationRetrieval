@@ -1,6 +1,7 @@
 /node_modules/
 /corpus/
 /corpus2/
+/corpus1/
 /.idea/
 junit.xml
 simple-wikipedia.zip
