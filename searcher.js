@@ -10,13 +10,18 @@ export default class Searcher {
                        let wordsList = this.preprocessingSearchTerm(query);
                        let relevantSets = this.searchRelevantSets(wordsList);
 
-                       // if (relevantSets.length != wordsList.length) {
-                       //     return [];
-                       // }
-
-                       // return this.compareSets(relevantSets);
+                       if(relevantSets == []) {
+                           return []
+                       }
                        let sortedSets = relevantSets.sort(function(a,b) {
                            if(a.score > b.score) return 1
+                           if(a.score == b.score) {
+                               if(a.filename > b.filename){
+                                   return 1
+                               } else {
+                                   return -1
+                               }
+                           }
                            if(a.score <= b.score) return -1
                            
                        });
@@ -73,12 +78,13 @@ export default class Searcher {
 
                            //insert into dictionary
                            newText.forEach(function(word) {
+                               let newFilename = file.substring(file.indexOf("/")+1, file.length);
                                if (vocabulary.has(word)) {
                                    let values = vocabulary.get(word).sets; //sets of object
                                    let foundEntry;
 
                                    values.forEach(currentSet => {
-                                       if (currentSet.filename === file) {
+                                       if (currentSet.filename === newFilename) {
                                            foundEntry = currentSet;
                                        }
                                    });
@@ -87,15 +93,8 @@ export default class Searcher {
                                        foundEntry.frequency++;
                                    } else {
                                        //word exists but its the first time it appears in this file
-                                       // vocabulary.set(
-                                       //     word,
-                                       //     values.add({
-                                       //         filename: file,
-                                       //         frequency: 1
-                                       //     })
-                                       // );
                                        values.add({
-                                           filename: file,
+                                           filename: newFilename,
                                            frequency: 1
                                        });
                                    }
@@ -103,7 +102,7 @@ export default class Searcher {
                                    //word has not yet appeared in any file
                                    let set = new Set([
                                        {
-                                           filename: file,
+                                           filename: newFilename,
                                            frequency: 1
                                        }
                                    ]);
@@ -112,7 +111,15 @@ export default class Searcher {
                            });
                        }
                        vocabulary = this.setIDF(vocabulary);
+                       if(vocabulary.has("")) { //delete empty as word
+                           vocabulary.delete("")
+                       }
                        return vocabulary;
+                   }
+
+                   formatFilename(filename) {
+                       let index = filename.indexOf("/")
+                       return filename.substring(index, filename.length)
                    }
 
                    setIDF(vocabulary) {
@@ -121,25 +128,8 @@ export default class Searcher {
                            entry.idf = this.num_docs / document_frequency;
                        });
                        return vocabulary
-                    //    vocabulary.forEach((element, key) => {
-                    //        console.log(key + " => " + element.idf);
-                    //        element.sets.forEach(set => {
-                    //            console.log(set);
-                    //        });
-                    //        console.log("--------------");
-                    //    });
                        //idf: num_total_documents/document_frequency
                        //{idf: number, sets: Set{frequency: number, filename: string}, Set{frequency: number, filename: string}, .... 
-                   }
-
-                   intersection(set1, set2) {
-                       let intersectionArray = new Set();
-                       for (let element of set2) {
-                           if (set1.has(element)) {
-                               intersectionArray.add(element);
-                           }
-                       }
-                       return intersectionArray;
                    }
 
                    preprocessingDictionary(words) {
