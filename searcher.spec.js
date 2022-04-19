@@ -52,42 +52,42 @@ describe("Searcher", () => {
         expectTop5SearchResultsFor("austria germany").toEqual([
             {
                 filename: "Anschluss.txt",
-                score: 3903.8262965918157,
+                score: 3903.9037273452636,
                 terms: {
-                    austria: 3741.190812720848,
-                    germany: 162.63548387096773
+                    austria: 3741.2650176678444,
+                    germany: 162.63870967741937
                 }
             },
             {
                 filename: "Austria.txt",
-                score: 3806.245006269235,
+                score: 3806.320501538812,
                 terms: {
-                    austria: 3741.190812720848,
-                    germany: 65.05419354838709
+                    austria: 3741.2650176678444,
+                    germany: 65.05548387096775
                 }
             },
             {
                 filename: "Germany.txt",
-                score: 2696.7606770773964,
+                score: 2696.814166191725,
                 terms: {
-                    austria: 712.6077738515901,
-                    germany: 1984.1529032258063
+                    austria: 712.6219081272085,
+                    germany: 1984.1922580645164
                 }
             },
             {
                 filename: "Treaty_of_Versailles.txt",
-                score: 2659.751047532201,
+                score: 2659.8038025760857,
                 terms: {
-                    austria: 1781.5194346289752,
-                    germany: 878.2316129032257
+                    austria: 1781.5547703180212,
+                    germany: 878.2490322580646
                 }
             },
             {
                 filename: "Prussia.txt",
-                score: 1865.07844294996,
+                score: 1865.1154359968086,
                 terms: {
-                    austria: 1247.0636042402825,
-                    germany: 618.0148387096774
+                    austria: 1247.0883392226149,
+                    germany: 618.0270967741936
                 }
             }
         ]);
