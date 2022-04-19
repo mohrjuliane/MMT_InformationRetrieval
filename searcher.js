@@ -15,26 +15,12 @@ export default class Searcher {
                        // }
 
                        // return this.compareSets(relevantSets);
-                       
-                       return relevantSets;
-                   }
-
-                   compareSets(sets) {
-                       while (sets.length > 1) {
-                           let nextToLastSet = sets[0];
-                           let lastSet = sets[1];
-                           let intersection = this.intersection(nextToLastSet, lastSet);
-
-                           if (sets.length > 2) {
-                               sets.shift(); //shift: delete first element of array
-                               sets.shift();
-                               sets.unshift(intersection); //unshift: add intersection at the beginning of array
-                           } else {
-                               sets = [intersection];
-                           }
-                       }
-
-                       return Array.from(sets[0]);
+                       let sortedSets = relevantSets.sort(function(a,b) {
+                           if(a.score > b.score) return 1
+                           if(a.score <= b.score) return -1
+                           
+                       });
+                       return sortedSets;
                    }
 
                    searchRelevantSets(wordsList) {
@@ -63,17 +49,13 @@ export default class Searcher {
                                return [];
                            }
                        });
-                       console.log(relevantSets)
                        return relevantSets;
                    }
 
                    findSetOfFile(filename, sets) {
                        let found = undefined
                         sets.forEach((set) => {
-                            console.log(set.filename, "set.filename")
-                            console.log(filename, "filename");
                             if(set.filename === filename) {
-                                console.log("found!!!", set)
                                 found = set
                                 return set;
                             }
