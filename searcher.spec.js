@@ -105,8 +105,8 @@ describe("Searcher", () => {
                     germany: 1984.1922580645164
                 },
                 termsNormalized: {
-                    austria: 712.6219081272085,
-                    germany: 1984.1922580645164
+                    austria: 0.4124846645765548,
+                    germany: 2.1256332748815776
                 }
             },
             {
