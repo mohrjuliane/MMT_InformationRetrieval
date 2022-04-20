@@ -3,7 +3,17 @@ export default class Searcher {
         var fs = require("fs");
         this.num_docs = files.length;
         this.stopwords = fs.readFileSync("stop-words.txt", "utf-8").split("\n");
+        this.wordCounts = [];
         this.dictionary = this.createDictionary(files);
+        this.averageWords = this.getAverageWords()
+    }
+
+    getAverageWords() { //get average doc length in the text collection = avgdl
+        let sum = 0
+        this.wordCounts.forEach((file) => {
+            sum += file.count
+        })
+        return sum / this.wordCounts.length
     }
 
     search(query) {
@@ -24,6 +34,20 @@ export default class Searcher {
             }
             if (a.score < b.score) return 1;
         });
+        
+        //----------------sort bei normalized Okapi BM25------------------- 
+        // let sortedSetsNormalized = relevantSets.sort(function(a,b) {
+        //     if (a.scoreNormalized > b.scoreNormalized) return -1;
+        //     if (a.scoreNormalized == b.scoreNormalized) {
+        //         if (a.filename > b.filename) {
+        //             return 1;
+        //         } else {
+        //             return -1;
+        //         }
+        //     }
+        //     if (a.scoreNormalized < b.scoreNormalized) return 1;
+        // })
+
         return sortedSets;
     }
 
@@ -35,17 +59,24 @@ export default class Searcher {
                 entry.sets.forEach(set => {
                     let foundSet = this.findSetOfFile(set.filename, relevantSets);
                     let score = entry.idf * set.frequency;
+                    let scoreNormalized = this.normalizedIdf(set)
                     if (foundSet != undefined) {
                         //set exists already in relevantSets
                         foundSet.score += score;
+                        foundSet.scoreNormalized += scoreNormalized;
                         foundSet.terms[word] = score; // set new score of word
+                        foundSet.termsNormalized[word] = scoreNormalized;
                     } else {
                         let obj = {};
+                        let objNormalized = {};
                         obj[word] = score;
+                        objNormalized[word] = scoreNormalized;
                         relevantSets.push({
                             filename: set.filename,
                             score: score,
-                            terms: obj
+                            scoreNormalized: scoreNormalized,
+                            terms: obj,
+                            termsNormalized: objNormalized
                         });
                     }
                 });
@@ -73,11 +104,16 @@ export default class Searcher {
 
         for (const file of files) {
             var text = fs.readFileSync(file, "utf-8");
-            let newText = this.preprocessingDictionary(text);
+            let newFilename = file.substring(file.indexOf("/") + 1, file.length);
+            let newText = this.preprocessingDictionary(text); //replace punctuation marks and split text
+            this.wordCounts.push({ //save length of document in words for normalizedIdf
+                filename: newFilename,
+                count: newText.length
+            });
 
             //insert into dictionary
             newText.forEach(function(word) {
-                let newFilename = file.substring(file.indexOf("/") + 1, file.length);
+                
                 if (vocabulary.has(word)) {
                     let values = vocabulary.get(word).sets; //sets of object
                     let foundEntry;
@@ -128,7 +164,6 @@ export default class Searcher {
             entry.idf = this.num_docs / document_frequency;
         });
         return vocabulary;
-        //idf: num_total_documents/document_frequency
         //{idf: number, sets: Set{frequency: number, filename: string}, Set{frequency: number, filename: string}, ....
     }
 
@@ -161,5 +196,27 @@ export default class Searcher {
             }
         });
         return wordsList;
+    }
+
+    normalizedIdf(currentDocument) {
+        //free parameters
+        let k1 = 2;
+        let b = 0.75;
+        let counter = currentDocument.frequency * (k1 + 1);
+        let denominator =
+            currentDocument.frequency +
+            2 * (1 - b + b * (this.findCountofDoc(currentDocument.filename) / this.averageWords));
+        return counter / denominator;
+    }
+
+    findCountofDoc(filename) {
+        let result;
+        this.wordCounts.forEach((file) => {
+            if(file.filename === filename) {
+                result = file.count;
+                return result;
+            }
+        })
+        return result;
     }
 }
