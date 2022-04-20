@@ -5,15 +5,16 @@ export default class Searcher {
         this.stopwords = fs.readFileSync("stop-words.txt", "utf-8").split("\n");
         this.wordCounts = [];
         this.dictionary = this.createDictionary(files);
-        this.averageWords = this.getAverageWords()
+        this.averageWords = this.getAverageWords();
     }
 
-    getAverageWords() { //get average doc length in the text collection = avgdl
-        let sum = 0
-        this.wordCounts.forEach((file) => {
-            sum += file.count
-        })
-        return sum / this.wordCounts.length
+    getAverageWords() {
+        //get average doc length in the text collection = avgdl
+        let sum = 0;
+        this.wordCounts.forEach(file => {
+            sum += file.count;
+        });
+        return sum / this.wordCounts.length;
     }
 
     search(query) {
@@ -34,8 +35,8 @@ export default class Searcher {
             }
             if (a.score < b.score) return 1;
         });
-        
-        //----------------sort bei normalized Okapi BM25------------------- 
+
+        //----------------sort bei normalized Okapi BM25-------------------
         // let sortedSetsNormalized = relevantSets.sort(function(a,b) {
         //     if (a.scoreNormalized > b.scoreNormalized) return -1;
         //     if (a.scoreNormalized == b.scoreNormalized) {
@@ -59,7 +60,7 @@ export default class Searcher {
                 entry.sets.forEach(set => {
                     let foundSet = this.findSetOfFile(set.filename, relevantSets);
                     let score = entry.idf * set.frequency;
-                    let scoreNormalized = this.normalizedIdf(set)
+                    let scoreNormalized = this.normalizedIdf(set);
                     if (foundSet != undefined) {
                         //set exists already in relevantSets
                         foundSet.score += score;
@@ -106,14 +107,14 @@ export default class Searcher {
             var text = fs.readFileSync(file, "utf-8");
             let newFilename = file.substring(file.indexOf("/") + 1, file.length);
             let newText = this.preprocessingDictionary(text); //replace punctuation marks and split text
-            this.wordCounts.push({ //save length of document in words for normalizedIdf
+            this.wordCounts.push({
+                //save length of document in words for normalizedIdf
                 filename: newFilename,
                 count: newText.length
             });
 
             //insert into dictionary
             newText.forEach(function(word) {
-                
                 if (vocabulary.has(word)) {
                     let values = vocabulary.get(word).sets; //sets of object
                     let foundEntry;
@@ -211,12 +212,12 @@ export default class Searcher {
 
     findCountofDoc(filename) {
         let result;
-        this.wordCounts.forEach((file) => {
-            if(file.filename === filename) {
+        this.wordCounts.forEach(file => {
+            if (file.filename === filename) {
                 result = file.count;
                 return result;
             }
-        })
+        });
         return result;
     }
 }
